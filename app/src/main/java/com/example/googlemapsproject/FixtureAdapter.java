@@ -62,9 +62,10 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureR
 if(fixture != null) {
     String opp = fixture.getAwayTeam().getName();
     String home = "home";
-    if(opp.equals(StringReferences.JUDES))
+    if(opp.equals(StringReferences.JUDES)) {
         home = "away";
         opp = fixture.getHomeTeam().getName();
+    }
     holder.location.setText(home);
     holder.opposition.setText(opp);
     holder.fixtureDate.setText(fixture.getFixtureDate());
