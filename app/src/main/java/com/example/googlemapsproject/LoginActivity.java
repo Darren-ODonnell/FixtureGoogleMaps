@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             Login loginObj = new Login(username, password);
             service.login(loginObj);
 
-            startActivity(new Intent(getApplicationContext(), BottomNavActivity.class));
+            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
 
         });
     }

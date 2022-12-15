@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if(aBoolean){
-                    startActivity(new Intent(getApplicationContext(), BottomNavActivity.class));
+                    startActivity(new Intent(getApplicationContext(), FixtureActivity.class));
                     TokenSingleton.getInstance().setTokenString(token);
                     storeToken(getApplicationContext());
                 }else{

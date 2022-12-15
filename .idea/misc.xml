@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Darren/Desktop/College Final Year/Android/GoogleMapsProject/app/src/main/res/layout/activity_fixture.xml" value="0.1585144927536232" />
+        <entry key="..\:/Users/Darren/Desktop/College Final Year/Android/GoogleMapsProject/app/src/main/res/layout/activity_main.xml" value="0.1585144927536232" />
         <entry key="..\:/Users/Darren/Desktop/College Final Year/Android/GoogleMapsProject/app/src/main/res/layout/bottom_nav.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Darren/Desktop/College Final Year/Android/GoogleMapsProject/app/src/main/res/layout/fixture_row.xml" value="0.1585144927536232" />
         <entry key="..\:/Users/Darren/Desktop/College Final Year/Android/GoogleMapsProject/app/src/main/res/layout/register_login_screen.xml" value="0.18802083333333333" />
       </map>
     </option>
