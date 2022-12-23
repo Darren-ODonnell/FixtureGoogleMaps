@@ -71,11 +71,6 @@ if(fixture != null) {
     holder.fixtureDate.setText(fixture.getFixtureDate());
     holder.image.setText("Image");
 
-
-
-
-
-
 }
 
     }
@@ -171,6 +166,8 @@ if(fixture != null) {
         void onDelete(int position);
         void onDone(int position);
     }
+
+
 
 
 }
