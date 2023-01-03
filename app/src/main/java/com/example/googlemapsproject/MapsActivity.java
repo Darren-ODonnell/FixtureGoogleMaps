@@ -7,6 +7,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.googlemapsproject.Models.Club;
@@ -28,6 +30,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     Fixture currentFixture;
+    Double latitude;
+    Double longitude;
+    Double temp;
+    String tempUnits;
+    String tempStr;
+    int icon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +47,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent i = getIntent();
         currentFixture = (Fixture) i.getSerializableExtra("currentFixture");
+        latitude = (Double) i.getSerializableExtra("lat");
+        longitude = (Double) i.getSerializableExtra("long");
+        temp =  i.getDoubleExtra("temp", 0.0);
+        tempUnits = (String) i.getSerializableExtra("tempUnits");
+
+        tempStr = "Forecast for game: " + temp + tempUnits;
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        assert mapFragment != null;
+        mapFragment.getMapAsync(this);
+
 
         binding.button2.setOnClickListener(v -> startActivity(new Intent(this,FixtureActivity.class)));
 
         //TODO Get Long Lat from Intent
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        assert mapFragment != null;
-        mapFragment.getMapAsync(this);
+
     }
 
     /**
@@ -64,10 +83,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         if(currentFixture != null) {
+            TextView tempTV = findViewById(R.id.tempTV);
+            tempTV.setText(tempStr);
+
+            ImageView imageView = findViewById(R.id.imageView);
+            imageView.setImageResource(
+                    (temp > 3)
+                    ? R.drawable.ic_baseline_wb_sunny_24
+                    : R.drawable.ic_baseline_severe_cold_24
+            );
+
+
             String location = currentFixture.getHomeTeam().getPitches();
 
             // Add a marker in Sydney and move the camera
-            LatLng dublin = getLocationFromString(location);
+            LatLng dublin = new LatLng(latitude,longitude);
 
             mMap.addMarker(new MarkerOptions().position(dublin).title("Marker in " + location));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(dublin));
@@ -78,8 +108,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public LatLng getLocationFromString(String attraction){
         // retrieve latitude and longitude of city/attraction
         Geocoder coder = new Geocoder( this );
-        double latitude = 53;
-        double longitude = -6;
         try { // geocode city
             List<Address> locations =
                     coder.getFromLocationName(attraction, 2); //return max 2
