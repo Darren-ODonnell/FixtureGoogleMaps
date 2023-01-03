@@ -47,5 +47,37 @@ public class FixtureRepository {
     public LiveData<List<Fixture>> getFixturesResponseLiveData() {
         return fixtureResponseLiveData;
     }
+
+    public void update(String token, Fixture fixture) {
+        apiInterface.updateFixture(token, fixture).enqueue(new Callback<List<Fixture>>() {
+            @Override
+            public void onResponse(Call<List<Fixture>> call, Response<List<Fixture>> response) {
+                if (response.body() != null) {
+                    fixtureResponseLiveData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Fixture>> call, Throwable t) {
+                fixtureResponseLiveData.postValue(null);
+            }
+        });
+    }
+
+    public void delete(String token, Fixture fixture) {
+        apiInterface.deleteFixture(token, fixture).enqueue(new Callback<List<Fixture>>() {
+            @Override
+            public void onResponse(Call<List<Fixture>> call, Response<List<Fixture>> response) {
+                if (response.body() != null) {
+                    fixtureResponseLiveData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Fixture>> call, Throwable t) {
+                fixtureResponseLiveData.postValue(null);
+            }
+        });
+    }
 }
 

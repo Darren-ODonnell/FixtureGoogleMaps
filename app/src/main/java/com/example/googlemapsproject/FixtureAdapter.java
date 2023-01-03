@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bottomnavigationproper.StringReferences;
+import com.example.googlemapsproject.Models.Club;
 import com.example.googlemapsproject.Models.Fixture;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -84,7 +85,6 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureR
             holder.location.setText(home);
             holder.opposition.setText(opp);
             holder.fixtureDate.setText(fixture.getFixtureDate());
-            holder.image.setText("Image");
 
 //            LatLng latLng = new LatLng(53, -6);
 
@@ -156,11 +156,9 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureR
     // implements View.OnClickListener
     class FixtureResultsHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, View.OnClickListener {
         private TextView fixtureDate;
-        private TextView image;
         private TextView location;
         private TextView opposition;
-        private TextView temp;
-        private TextView tempUnits;
+
 
         OnNoteListener onNoteListener;
 
@@ -169,17 +167,10 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureR
 
             fixtureDate = itemView.findViewById(R.id.fixture_date);
             fixtureDate.setKeyListener(null);
-            image = itemView.findViewById(R.id.image);
-            image.setKeyListener(null);
             location = itemView.findViewById(R.id.location);
             location.setKeyListener(null);
             opposition = itemView.findViewById(R.id.opposition);
             opposition.setKeyListener(null);
-            temp = itemView.findViewById(R.id.temp);
-            temp.setKeyListener(null);
-            tempUnits = itemView.findViewById(R.id.tempUnits);
-            tempUnits.setKeyListener(null);
-
 
             this.onNoteListener = onNoteListener;
 
@@ -209,7 +200,7 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureR
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case 1:
-                        onNoteListener.onNoteClick(getAdapterPosition());
+                        onNoteListener.onSpeechInput(getAdapterPosition());
                         Toast.makeText(itemView.getContext(),"Edit",Toast.LENGTH_LONG).show();
                         return true;
                     case 2:
@@ -220,6 +211,10 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureR
                         onNoteListener.onDone(getAdapterPosition());
                         Toast.makeText(itemView.getContext(), "Status Updated",Toast.LENGTH_LONG).show();
                         return true;
+                    case 4:
+                        onNoteListener.onNoteClick(getAdapterPosition());
+                        Toast.makeText(itemView.getContext(), "Deleted",Toast.LENGTH_LONG).show();
+                        return true;
                 }
                 return false;
             }
@@ -227,6 +222,7 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureR
     }
 
     public interface OnNoteListener{
+        void onSpeechInput(int position);
         void onNoteClick(int position);
         void onDelete(int position);
         void onDone(int position);

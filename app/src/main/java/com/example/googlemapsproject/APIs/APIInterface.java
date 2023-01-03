@@ -10,6 +10,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -34,4 +35,9 @@ public interface APIInterface {
     @GET("club/findByName")
     Call<Club> getClubByName(@Header("Authorization") String accessToken);
 
+    @POST("fixture/update")
+    Call<List<Fixture>> updateFixture(@Header("Authorization") String token, @Body Fixture fixture);
+
+    @DELETE("fixture/delete")
+    Call<List<Fixture>> deleteFixture(@Header("Authorization") String token, @Body Fixture fixture);
 }

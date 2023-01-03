@@ -60,6 +60,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".FixtureActivity" />
+        <activity
+            android:name=".UpdateActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.UPDATE" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
